@@ -24,29 +24,29 @@ namespace PathCreation.Examples {
         public float distFromCenterPath = 1.5f;
         public float minDistanceBetweenPoints = 3f;
         public bool debug;
-        [SerializeField, HideInInspector]
-        GameObject meshHolder;
-
+       public GameObject meshHolder;
+        [SerializeField] GameObject finalPodium;
         MeshFilter meshFilter;
         MeshRenderer meshRenderer;
         Mesh mesh;
-      //  Vector3[] cubepos;
+     Vector3[] cubepos;
  
-
-
         protected override void PathUpdated()
         {
             if (pathCreator != null)
             {
-                AssignMeshComponents();
-                AssignMaterials();
-                CreateRoadMesh();
+         
+                    AssignMeshComponents();
+                    AssignMaterials();
+                    CreateRoadMesh();
+
                 CreateSidePaths();
-                //                Debug.Log(pathCreator.path.NumPoints);
+                
+                finalPodium.transform.position = pathCreator.path.GetPoint(pathCreator.path.NumPoints-1);
+                finalPodium.transform.eulerAngles = new Vector3(0, Vector3.Angle(Vector3.forward, pathCreator.path.GetNormal(pathCreator.path.NumPoints - 1))-90, 0);
+//           Debug.Log(Vector3.Angle(Vector3.forward, pathCreator.path.GetNormal(pathCreator.path.NumPoints - 1)));
                 // Debug.Log(pathCreator.bezierPath.NumPoints);
-           
             }
-           
         }
 
 
@@ -198,11 +198,34 @@ namespace PathCreation.Examples {
         }
 
         // Add MeshRenderer and MeshFilter components to this gameobject if not already attached
-        void AssignMeshComponents () {
+        void AssignMeshComponents() {
 
-            if (meshHolder == null) {
-                meshHolder = new GameObject ("Road Mesh Holder");
+            meshHolder = GameObject.FindGameObjectWithTag("RoadMeshHolder");
+         //   DestroyImmediate(meshHolder);
+        
+                if (meshHolder == null)
+                {
+                    meshHolder = new GameObject("Road Mesh Holder");
+
+                   
+                }
+            if (meshHolder.gameObject.GetComponent<MeshCollider>())
+            {
+                DestroyImmediate(meshHolder.gameObject.GetComponent<MeshCollider>());
             }
+
+            if(!meshHolder.gameObject.GetComponent<MeshCollider>())
+            {
+                meshHolder.gameObject.AddComponent<MeshCollider>();
+                meshHolder.gameObject.layer = LayerMask.NameToLayer("Water");
+                meshHolder.gameObject.tag = "RoadMeshHolder";
+            }
+        
+
+                
+           
+           
+
 
             meshHolder.transform.rotation = Quaternion.identity;
             meshHolder.transform.position = Vector3.zero;
@@ -231,7 +254,7 @@ namespace PathCreation.Examples {
             }
         }
 
-
+       
         void CreateSidePaths()
         {
 
@@ -264,7 +287,7 @@ namespace PathCreation.Examples {
             leftPath.bezierPath.IsClosed = false;
             if (leftPath.GetComponent<SidePath>())
             {
-                leftPath.GetComponent<SidePath>().PathUpdated();
+                leftPath.GetComponent<SidePath>().PathUpdated(minDistanceBetweenPoints);
             }
             Vector3[] pns2 = new Vector3[((pathCreator.bezierPath.NumPoints - 1) / 3) + 1];
             int indx2 = 0;
@@ -294,7 +317,7 @@ namespace PathCreation.Examples {
             rightPath.bezierPath.IsClosed = false;
             if (rightPath.GetComponent<SidePath>())
             {
-                rightPath.GetComponent<SidePath>().PathUpdated();
+                rightPath.GetComponent<SidePath>().PathUpdated(minDistanceBetweenPoints);
             }
         }
     }
