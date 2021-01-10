@@ -91,13 +91,18 @@ namespace NameSpaceName {
                 {
                     case GAMESTATE.GAMESTART:
                         InvokeRepeating("SortStats", 0.1f, 0.1f);
-                        break;
+                    TinySauce.OnGameStarted((SceneManager.GetActiveScene().buildIndex+1).ToString());
+
+                    break;
                     case GAMESTATE.RACECOMPLETE:
                         break;
                 case GAMESTATE.GAMEOVER:
-
+                    TinySauce.OnGameFinished((SceneManager.GetActiveScene().buildIndex + 1).ToString(), false, 0);
+                    Taptic.Heavy();
                     break;
                 case GAMESTATE.GAMECOMPLETE:
+                    //  Taptic.Success();
+                    TinySauce.OnGameFinished((SceneManager.GetActiveScene().buildIndex + 1).ToString(), true,0);
                     PlayerPrefs.SetInt("LEVEL", SceneManager.GetActiveScene().buildIndex + 1);
                     break;
             }

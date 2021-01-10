@@ -121,7 +121,7 @@ namespace NameSpaceName {
                     if (isAi)
                         CalculateSafeZone();
                     CalculateCrashZone();
-                    if (!pathCompleted)
+                    if (!complete)
                     {
                         IncrIndex();
                         CalculateSteering();
@@ -132,7 +132,7 @@ namespace NameSpaceName {
                     {
                      //   ads.volume = 0;
                     }
-                    if (ads)
+                    if (ads && !complete)
                         CalculateEngineSound();
                     CalculateCompletion();
                     CalculateRace();
@@ -161,8 +161,15 @@ namespace NameSpaceName {
             rb = GetComponent<Rigidbody>();
         }
        public bool complete;
+        bool isPlaying = false;
+
         void CalculateEngineSound()
         {
+            if (!isPlaying)
+            {
+                isPlaying = true;
+                ads.Play();
+            }
             if (inputMove > 0)
             {
                 ads.volume = inputMove;
@@ -180,27 +187,32 @@ namespace NameSpaceName {
             {
                 if (!isAi)
                 {
-                    if (crash)
+                    if (crash && gm.CurrentGameState!=GAMESTATE.GAMEOVER)
                     {
                         gm.SetGameState(GAMESTATE.GAMEOVER);
                     }
                   
                 }
-                if (completion >= 99.5f)
+                if (completion >= 99.8f)
                 {
                     if (!complete)
                     {
-                        GetComponent<Statistics>().finalRank = gm.reachedDestination;
-                        gm.reachedDestination++;
-                        complete = true;
-                    }
-                    if (!isAi)
-                    {
-                        gm.SetGameState(GAMESTATE.RACECOMPLETE);
-                        rb.constraints = RigidbodyConstraints.FreezeAll;
+                        RaceComplete();
                     }
                 }
+            }
+        }
 
+        void RaceComplete()
+        {
+            GetComponent<Statistics>().finalRank = gm.reachedDestination;
+            gm.reachedDestination++;
+            complete = true;
+            ads.volume = 0;
+            if (!isAi)
+            {
+                gm.SetGameState(GAMESTATE.RACECOMPLETE);
+                rb.constraints = RigidbodyConstraints.FreezeAll;
             }
         }
         void CalculateSteering()
@@ -241,6 +253,10 @@ namespace NameSpaceName {
                 if(Vector3.Distance(transform.position,positions[currentIndex-1].point)<2f)
                 {
                     pathCompleted = true;
+                    if (!complete)
+                    {
+                        RaceComplete();
+                    }
                     currentIndex = positions.Count - 1;
 
                 }
@@ -278,7 +294,7 @@ namespace NameSpaceName {
         {
             if (isAi)
             {
-                if (safe && !pathCompleted)
+                if (safe && !complete)
                 {
                     inputMove += Time.deltaTime/2;
                     inputMove = Mathf.Clamp01(inputMove);
@@ -308,7 +324,7 @@ namespace NameSpaceName {
 
         void CalculateMovement()
         {
-            if (!pathCompleted)
+            if (!complete)
             {
                 if (!crash)
                 {
@@ -329,7 +345,7 @@ namespace NameSpaceName {
 
         void CalculateCrashZone()
         {
-            if (!pathCompleted)
+            if (!complete)
             {
                 if (Physics.CapsuleCastNonAlloc(p1.position, p2.position, 0.25f, -transform.up, hit, 2f, layer) < 2 && !crash)
                 {

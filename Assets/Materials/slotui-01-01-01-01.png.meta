@@ -1,0 +1,655 @@
+fileFormatVersion: 2
+guid: 58b12ffae46644a98b1acf487c8bc42d
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3920634640640901125
+    second: slotui-01-01-01-01_0
+  - first:
+      213: 2998540352090730262
+    second: slotui-01-01-01-01_1
+  - first:
+      213: -38798684876648424
+    second: slotui-01-01-01-01_2
+  - first:
+      213: -8476238215004820104
+    second: slotui-01-01-01-01_3
+  - first:
+      213: 5654894131422644071
+    second: slotui-01-01-01-01_4
+  - first:
+      213: -2629205433813457501
+    second: slotui-01-01-01-01_5
+  - first:
+      213: -4656747723473876116
+    second: slotui-01-01-01-01_6
+  - first:
+      213: 3649865351262699609
+    second: slotui-01-01-01-01_7
+  - first:
+      213: -4807682562147328705
+    second: slotui-01-01-01-01_8
+  - first:
+      213: -8876427286856994142
+    second: slotui-01-01-01-01_9
+  - first:
+      213: 8565746021660706653
+    second: slotui-01-01-01-01_10
+  - first:
+      213: 9200668883273935679
+    second: slotui-01-01-01-01_11
+  - first:
+      213: 8955103553474812078
+    second: slotui-01-01-01-01_12
+  - first:
+      213: 563446809215708981
+    second: slotui-01-01-01-01_13
+  - first:
+      213: -2327606133926436190
+    second: slotui-01-01-01-01_14
+  - first:
+      213: -1936330155320494329
+    second: slotui-01-01-01-01_15
+  - first:
+      213: 8357424819201872309
+    second: slotui-01-01-01-01_16
+  - first:
+      213: -5980413856270717446
+    second: slotui-01-01-01-01_17
+  - first:
+      213: -1750259458007312537
+    second: slotui-01-01-01-01_18
+  - first:
+      213: -3887944321963603561
+    second: slotui-01-01-01-01_19
+  - first:
+      213: 1909427661519003838
+    second: slotui-01-01-01-01_20
+  - first:
+      213: 3409576308107160473
+    second: slotui-01-01-01-01_21
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: -1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: slotui-01-01-01-01_0
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 1792
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 9, y: 9, z: 9, w: 9}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bfff186119b1799c0800000000000000
+      internalID: -3920634640640901125
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slotui-01-01-01-01_1
+      rect:
+        serializedVersion: 2
+        x: 282
+        y: 1819
+        width: 479
+        height: 203
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 61fea033094fc9920800000000000000
+      internalID: 2998540352090730262
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slotui-01-01-01-01_2
+      rect:
+        serializedVersion: 2
+        x: 789
+        y: 1823
+        width: 469
+        height: 195
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 810dc2a3dc8267ff0800000000000000
+      internalID: -38798684876648424
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slotui-01-01-01-01_3
+      rect:
+        serializedVersion: 2
+        x: 1395
+        y: 1812
+        width: 256
+        height: 186
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 87deb03a04a5e5a80800000000000000
+      internalID: -8476238215004820104
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slotui-01-01-01-01_4
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 1643
+        width: 374
+        height: 138
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 76743e960483a7e40800000000000000
+      internalID: 5654894131422644071
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slotui-01-01-01-01_5
+      rect:
+        serializedVersion: 2
+        x: 407
+        y: 1631
+        width: 156
+        height: 155
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3a5a50c869f238bd0800000000000000
+      internalID: -2629205433813457501
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slotui-01-01-01-01_6
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 1343
+        width: 266
+        height: 267
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c6b0bb53e98ef5fb0800000000000000
+      internalID: -4656747723473876116
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slotui-01-01-01-01_7
+      rect:
+        serializedVersion: 2
+        x: 317
+        y: 1376
+        width: 481
+        height: 201
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 950050cf23de6a230800000000000000
+      internalID: 3649865351262699609
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slotui-01-01-01-01_8
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 1117
+        width: 700
+        height: 197
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f3d5e529e2ea74db0800000000000000
+      internalID: -4807682562147328705
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slotui-01-01-01-01_9
+      rect:
+        serializedVersion: 2
+        x: 719
+        y: 1138
+        width: 701
+        height: 196
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2a2fd44796890d480800000000000000
+      internalID: -8876427286856994142
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slotui-01-01-01-01_10
+      rect:
+        serializedVersion: 2
+        x: 143
+        y: 799
+        width: 1782
+        height: 266
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d574d499f94afd670800000000000000
+      internalID: 8565746021660706653
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slotui-01-01-01-01_11
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 427
+        width: 275
+        height: 278
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f3b68832a975faf70800000000000000
+      internalID: 9200668883273935679
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slotui-01-01-01-01_12
+      rect:
+        serializedVersion: 2
+        x: 359
+        y: 445
+        width: 268
+        height: 267
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea854b75c3be64c70800000000000000
+      internalID: 8955103553474812078
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slotui-01-01-01-01_13
+      rect:
+        serializedVersion: 2
+        x: 701
+        y: 452
+        width: 275
+        height: 275
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 53f212143e3c1d700800000000000000
+      internalID: 563446809215708981
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slotui-01-01-01-01_14
+      rect:
+        serializedVersion: 2
+        x: 990
+        y: 451
+        width: 276
+        height: 276
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2a26b4aad8ea2bfd0800000000000000
+      internalID: -2327606133926436190
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slotui-01-01-01-01_15
+      rect:
+        serializedVersion: 2
+        x: 1306
+        y: 459
+        width: 276
+        height: 275
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 707be3c9bf5c025e0800000000000000
+      internalID: -1936330155320494329
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slotui-01-01-01-01_16
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 250
+        width: 384
+        height: 147
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b19f81f7998bf370800000000000000
+      internalID: 8357424819201872309
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slotui-01-01-01-01_17
+      rect:
+        serializedVersion: 2
+        x: 481
+        y: 262
+        width: 102
+        height: 132
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: afde827884d410da0800000000000000
+      internalID: -5980413856270717446
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slotui-01-01-01-01_18
+      rect:
+        serializedVersion: 2
+        x: 661
+        y: 235
+        width: 475
+        height: 202
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 767d4b4db44d5b7e0800000000000000
+      internalID: -1750259458007312537
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slotui-01-01-01-01_19
+      rect:
+        serializedVersion: 2
+        x: 1146
+        y: 163
+        width: 274
+        height: 275
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 799ccd60d3f3b0ac0800000000000000
+      internalID: -3887944321963603561
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slotui-01-01-01-01_20
+      rect:
+        serializedVersion: 2
+        x: 1519
+        y: 213
+        width: 105
+        height: 168
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb025217756af7a10800000000000000
+      internalID: 1909427661519003838
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slotui-01-01-01-01_21
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 7
+        width: 707
+        height: 207
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 99ba057669f315f20800000000000000
+      internalID: 3409576308107160473
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: d1909fcee622b4bdb8a723319db9b2c3
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -16,16 +16,31 @@ namespace NameSpaceName
         bool complete;
         void Start()
         {
-            pf = GetComponent<FollowPath>();
-            gm = FindObjectOfType<GameManager>();
-            if (!pf.isAi)
-            {
-                isPlayer = true;
-            }
-            gm.AddToStats(this);
+       
 
         }
 
+        void OnEnable()
+        {
+            gm = FindObjectOfType<GameManager>();
+            pf = GetComponent<FollowPath>();
+            if (!pf.isAi)
+            {
+                isPlayer = true;
+                FindObjectOfType<VirtualCameraScript>().SetCameraTarget(this.gameObject.transform);
+            }
+            else
+            {
+                GetComponentInChildren<Canvas>().gameObject.SetActive(false);
+            }
+            gm.AddToStats(this);
+
+            gm.OnGameStateChangedAction += OnGameStateChanged;
+        }
+        private void OnDisable()
+        {
+            gm.OnGameStateChangedAction -= OnGameStateChanged;
+        }
         // Update is called once per frame
         void Update()
         {
@@ -36,5 +51,28 @@ namespace NameSpaceName
             }
 
         }
+
+        void OnGameStateChanged(GAMESTATE gs)
+        {
+
+            switch (gs)
+            {
+                case GAMESTATE.GAMESTART:
+                   // Debug.Log("off");
+                    if (!pf.isAi)
+                        GetComponentInChildren<Canvas>().gameObject.SetActive(false);
+
+                    break;
+                case GAMESTATE.RACECOMPLETE:
+              
+                    break;
+                case GAMESTATE.GAMEOVER:
+                    //  gm.SetGameState(GAMESTATE.GAMEOVER);
+                    break;
+                case GAMESTATE.GAMECOMPLETE:
+                    break;
+            }
+        }
+
     }
 }

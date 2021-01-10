@@ -19,7 +19,8 @@ namespace NameSpaceName {
         [SerializeField] GameObject gameplayPanel;
         [SerializeField] GameObject gameCompletePanel;
         [SerializeField] GameObject gameOverPanel;
-        [SerializeField] Slider progressionSlider;
+    //    [SerializeField] Slider progressionSlider;
+        [SerializeField] Image progressionSliderImage;
         [SerializeField] TextMeshProUGUI positionText;
         [SerializeField] TextMeshProUGUI levelText;
 
@@ -49,7 +50,7 @@ namespace NameSpaceName {
         {
             if (mainPlayerStats)
             {
-                progressionSlider.value = mainPlayerStats.completion / 100;
+                progressionSliderImage.fillAmount = mainPlayerStats.completion / 100;
                 if (mainPlayerStats.rank == 0)
                 {
                     positionText.text = (mainPlayerStats.rank + 1).ToString() + " st";
@@ -77,22 +78,23 @@ namespace NameSpaceName {
                 case GAMESTATE.RACECOMPLETE:
                     if (mainPlayerStats.finalRank == 0)
                     {
-                        GameCompleteUI();
+                      //  GameCompleteUI();
 
                         gm.SetGameState(GAMESTATE.GAMECOMPLETE);
                     }
                     else
                     {
-                        GameOverUI();
+                       // GameOverUI();
 
                         gm.SetGameState(GAMESTATE.GAMEOVER);
                     }
                     break;
                 case GAMESTATE.GAMEOVER:
-                    gm.SetGameState(GAMESTATE.GAMEOVER);
-
+                    //  gm.SetGameState(GAMESTATE.GAMEOVER);
+                    GameOverUI();
                     break;
                 case GAMESTATE.GAMECOMPLETE:
+                    GameCompleteUI();
                     break;
             }
         }
@@ -108,13 +110,13 @@ namespace NameSpaceName {
         public void _RestartGameButton()
         {
             Time.timeScale = 1;
-            // Debug.Log(SceneManager.GetActiveScene().buildIndex);
+          // Debug.Log(SceneManager.GetActiveScene().buildIndex);
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
         }
         public void _NextLevelButton()
         {
-            Time.timeScale = 1;
+          Time.timeScale = 1;
             if (Application.CanStreamedLevelBeLoaded(SceneManager.GetActiveScene().buildIndex + 1))
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
         }
