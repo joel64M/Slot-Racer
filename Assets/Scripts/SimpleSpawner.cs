@@ -25,9 +25,9 @@ namespace NameSpaceName {
             //   positions = rmc.pathCreator.path.GetPoint;
 
             rmc = FindObjectOfType<RoadMeshCreator>();
-            PlantPrefabs(minGapDist, 11, 13);
-            PlantPrefabs(minGapDist, 15, 20);
-            PlantPrefabs(minGapDist, 22, 27);
+            PlantPrefabs(minGapDist, 10, 15);
+            PlantPrefabs(minGapDist, 16, 25);
+            PlantPrefabs(minGapDist, 29, 37);
 
         }
 

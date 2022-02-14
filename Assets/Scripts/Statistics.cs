@@ -7,24 +7,20 @@ namespace NameSpaceName
     public class Statistics : MonoBehaviour
     {
         public string playerName;
-        public int rank;
         public int finalRank;
+        public int rank;
         public float completion;
         public bool isPlayer;
-        FollowPath pf;
+
+        EngineBase eb;
         GameManager gm;
-        bool complete;
-        void Start()
-        {
-       
-
-        }
-
+  
         void OnEnable()
         {
             gm = FindObjectOfType<GameManager>();
-            pf = GetComponent<FollowPath>();
-            if (!pf.isAi)
+            eb = GetComponent<EngineBase>();
+
+            if (isPlayer)
             {
                 isPlayer = true;
                 FindObjectOfType<VirtualCameraScript>().SetCameraTarget(this.gameObject.transform);
@@ -33,23 +29,38 @@ namespace NameSpaceName
             {
                 GetComponentInChildren<Canvas>().gameObject.SetActive(false);
             }
+
             gm.AddToStats(this);
 
             gm.OnGameStateChangedAction += OnGameStateChanged;
         }
+
         private void OnDisable()
         {
             gm.OnGameStateChangedAction -= OnGameStateChanged;
         }
+
         // Update is called once per frame
         void Update()
         {
-            if (pf)
+            if (gm.CurrentGameState == GAMESTATE.GAMESTART)
             {
-                completion = pf.completion;
+                if (eb)
+                {
+                    completion = eb.completion;
+                }
+            }
+        }
+
+        public void ReachedGoal()
+        {
+            finalRank = gm.reachedDestination;
+            gm.reachedDestination++;
+            if (isPlayer)
+            {
+                gm.SetGameState(GAMESTATE.RACECOMPLETE);
              
             }
-
         }
 
         void OnGameStateChanged(GAMESTATE gs)
@@ -59,7 +70,7 @@ namespace NameSpaceName
             {
                 case GAMESTATE.GAMESTART:
                    // Debug.Log("off");
-                    if (!pf.isAi)
+                    if (isPlayer)
                         GetComponentInChildren<Canvas>().gameObject.SetActive(false);
 
                     break;

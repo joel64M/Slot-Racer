@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8bba5cdbc76d425ea4909e914d82ced, type: 3}
+  m_Name: YellowCar
+  m_EditorClassIdentifier: 
+  image: {fileID: 0}
+  tint: {r: 0.98765564, g: 1, b: 0, a: 1}
+  price: 10
+  nameString: YellowCar
+  prefab: {fileID: 5801549553187305918, guid: 636265e025de24126840c6ec34fed444, type: 3}
+  isDefaultSelected: 0

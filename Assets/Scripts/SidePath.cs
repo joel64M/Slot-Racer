@@ -15,13 +15,19 @@ namespace NameSpaceName {
     {
 
         #region Variables
-         float minDistanceBetweenPoints = 3f;
-        public List<newPoints> cubepos = new List<newPoints>();
+        public List<newPoints> pos = new List<newPoints>();
         public List<float> angles = new List<float>();
         public PathCreator pc;
+        public bool gizmos;
+
+        [Space(5)]
+        [Header("Private")]
+        [SerializeField] float minDistanceBetweenPoints = 3f;
+
+
+
          Vector3 st;
          Vector3 nd;
-        public bool gizmos;
         #endregion
 
         #region Builtin Methods
@@ -72,7 +78,7 @@ namespace NameSpaceName {
         void UpdateSidePath(PathCreator pathCreator)
         {
             
-                cubepos.Clear();
+                pos.Clear();
                 angles.Clear();
                 //  cubepos = new Vector3[pathCreator.path.NumPoints];
 
@@ -94,7 +100,7 @@ namespace NameSpaceName {
                                     newPoints np = new newPoints();
                                     np.point = pathCreator.path.GetPoint(i);
                                     np.normal = pathCreator.path.GetNormal(i);
-                                    cubepos.Add(np);
+                                    pos.Add(np);
                                     i = j + i;
                                     j = 1;
                                     break;
@@ -106,7 +112,7 @@ namespace NameSpaceName {
                             }
                             else
                             {
-                                for (int k = 0; k < cubepos.Count; k++)
+                                for (int k = 0; k < pos.Count; k++)
                                 {
 
                                     //  Debug.Log("asś");
@@ -114,20 +120,20 @@ namespace NameSpaceName {
 
                                     float angle = 0;
 
-                                    if (cubepos.Count > 3)
+                                    if (pos.Count > 3)
                                     {
-                                        if (k < cubepos.Count - 1)
+                                        if (k < pos.Count - 1)
                                         {
-                                            st = new Vector3(cubepos[k + 1].point.x - cubepos[k].point.x, 0, cubepos[k + 1].point.z - cubepos[k].point.z);
+                                            st = new Vector3(pos[k + 1].point.x - pos[k].point.x, 0, pos[k + 1].point.z - pos[k].point.z);
                                         }
-                                        if (k < cubepos.Count - 2)
+                                        if (k < pos.Count - 2)
                                         {
-                                            nd = new Vector3(cubepos[k + 2].point.x - cubepos[k].point.x, 0, cubepos[k + 2].point.z - cubepos[k].point.z);
+                                            nd = new Vector3(pos[k + 2].point.x - pos[k].point.x, 0, pos[k + 2].point.z - pos[k].point.z);
                                         }
 
                                         angle = Vector3.Angle(nd, st);
 
-                                        if (k < cubepos.Count - 1)
+                                        if (k < pos.Count - 1)
                                         {
                                             //  Handles.Label(cubepos[i + 1].point, (angle + " >" + (360 - angle * angle)).ToString(), guistyle);
                                             angles.Add(angle);
@@ -139,7 +145,7 @@ namespace NameSpaceName {
                                 newPoints np = new newPoints();
                                 np.point = pathCreator.path.GetPoint(pathCreator.path.NumPoints - 1);
                                 np.normal = pathCreator.path.GetNormal(pathCreator.path.NumPoints - 1);
-                                cubepos.Add(np);
+                                pos.Add(np);
                                 return;
                             }
 
@@ -150,7 +156,15 @@ namespace NameSpaceName {
 
             
         }
-    #endregion
+
+        private void OnDrawGizmos()
+        {
+            foreach (var item in pos)
+            {
+                Gizmos.DrawCube(item.point, Vector3.one);
+            }
+        }
+        #endregion
 
     }
 }

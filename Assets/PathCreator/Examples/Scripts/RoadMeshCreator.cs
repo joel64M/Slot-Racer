@@ -44,8 +44,7 @@ namespace PathCreation.Examples {
                 
                 finalPodium.transform.position = pathCreator.path.GetPoint(pathCreator.path.NumPoints-1);
                 finalPodium.transform.eulerAngles = new Vector3(0, Vector3.Angle(Vector3.forward, pathCreator.path.GetNormal(pathCreator.path.NumPoints - 1))-90, 0);
-//           Debug.Log(Vector3.Angle(Vector3.forward, pathCreator.path.GetNormal(pathCreator.path.NumPoints - 1)));
-                // Debug.Log(pathCreator.bezierPath.NumPoints);
+
             }
         }
 
@@ -222,11 +221,6 @@ namespace PathCreation.Examples {
             }
         
 
-                
-           
-           
-
-
             meshHolder.transform.rotation = Quaternion.identity;
             meshHolder.transform.position = Vector3.zero;
             meshHolder.transform.localScale = Vector3.one;
@@ -267,7 +261,6 @@ namespace PathCreation.Examples {
                 pns[indx] = pathCreator.bezierPath.GetPoint(i) - localRight * distFromCenterPath;
                 indx++;
             }
-
 
             BezierPath shs = new BezierPath(pns, false, PathSpace.xyz);
 

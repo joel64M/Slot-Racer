@@ -13,17 +13,19 @@ namespace NameSpaceName {
 
         #region Variables
         public int reachedDestination = 0;
-        public List<FollowPath> followPaths =  new List<FollowPath>();
+        public List<EngineBase> engines =  new List<EngineBase>();
         public GAMESTATE CurrentGameState
         {
            private set;
             get;
         }
-       public  event Action<GAMESTATE> OnGameStateChangedAction;
+        public  event Action<GAMESTATE> OnGameStateChangedAction;
         #endregion
 
-
+        #region STATS
         public List<Statistics> stats = new List<Statistics>();
+
+        Statistics playerStats;
 
         public class Completion : IComparer<Statistics>
         {
@@ -32,6 +34,7 @@ namespace NameSpaceName {
                 return x.completion.CompareTo(y.completion);
             }
         }
+
         void SortStats()
         {
             stats.Sort(new Completion());
@@ -41,36 +44,6 @@ namespace NameSpaceName {
                 stats[i].rank = i;
             }
         }
-
-
-        #region Builtin Methods
-        private void Awake()
-        {
-            if (PlayerPrefs.GetInt("LEVEL", 0) != SceneManager.GetActiveScene().buildIndex)
-            {
-                if (Application.CanStreamedLevelBeLoaded(PlayerPrefs.GetInt("LEVEL",0)))
-                    SceneManager.LoadScene(PlayerPrefs.GetInt("LEVEL", 0));
-            }
-        }
-        void OnEnable()
-        {
-
-        }
-        private void OnDisable()
-        {
-            
-        }
-        void Start()
-        {
-            followPaths = FindObjectsOfType<FollowPath>().ToList();
-            CalculateSides();
-        }
-
-
-
-        #endregion
-
-        #region Custom Methods
         public void AddToStats(Statistics s)
         {
             stats.Add(s);
@@ -79,9 +52,31 @@ namespace NameSpaceName {
                 if (s.isPlayer)
                 {
                     FindObjectOfType<UiManager>().mainPlayerStats = s;
+                    playerStats = s;
                 }
             }
         }
+        #endregion
+
+        #region Builtin Methods
+        //private void Awake()
+        //{
+        //    if (PlayerPrefs.GetInt("LEVEL", 0) != SceneManager.GetActiveScene().buildIndex)
+        //    {
+        //        if (Application.CanStreamedLevelBeLoaded(PlayerPrefs.GetInt("LEVEL",0)))
+        //            SceneManager.LoadScene(PlayerPrefs.GetInt("LEVEL", 0));
+        //    }
+        //}
+
+        void Start()
+        {
+            CalculateSides();
+        }
+   
+        #endregion
+
+        #region Custom Methods
+
         public void SetGameState(GAMESTATE gs)
         {
             OnGameStateChangedAction?.Invoke(gs);
@@ -91,18 +86,25 @@ namespace NameSpaceName {
                 {
                     case GAMESTATE.GAMESTART:
                         InvokeRepeating("SortStats", 0.1f, 0.1f);
-                    TinySauce.OnGameStarted((SceneManager.GetActiveScene().buildIndex+1).ToString());
-
+                    //TinySauce.OnGameStarted((SceneManager.GetActiveScene().buildIndex+1).ToString());
                     break;
                     case GAMESTATE.RACECOMPLETE:
-                        break;
+                        if (playerStats.finalRank == 0)
+                        {
+                            SetGameState(GAMESTATE.GAMECOMPLETE);
+                        }
+                        else
+                        {
+                            SetGameState(GAMESTATE.GAMEOVER);
+                        }
+                    break;
                 case GAMESTATE.GAMEOVER:
-                    TinySauce.OnGameFinished((SceneManager.GetActiveScene().buildIndex + 1).ToString(), false, 0);
+                    //TinySauce.OnGameFinished((SceneManager.GetActiveScene().buildIndex + 1).ToString(), false, 0);
                     Taptic.Heavy();
                     break;
                 case GAMESTATE.GAMECOMPLETE:
                     //  Taptic.Success();
-                    TinySauce.OnGameFinished((SceneManager.GetActiveScene().buildIndex + 1).ToString(), true,0);
+                    //TinySauce.OnGameFinished((SceneManager.GetActiveScene().buildIndex + 1).ToString(), true,0);
                     PlayerPrefs.SetInt("LEVEL", SceneManager.GetActiveScene().buildIndex + 1);
                     break;
             }
@@ -110,20 +112,21 @@ namespace NameSpaceName {
 
         void CalculateSides()
         {
-            int randomNum = UnityEngine.Random.Range(0, followPaths.Count);
+            engines = FindObjectsOfType<EngineBase>().ToList();
 
-            for (int i = 0; i < followPaths.Count; i++)
+            int randomNum = UnityEngine.Random.Range(0, engines.Count);
+
+            for (int i = 0; i < engines.Count; i++)
             {
                 if (i == randomNum)
                 {
-                    followPaths[i].Initialize(true);
+                    engines[i].Initialize(true);
                 }
                 else
                 {
-                    followPaths[i].Initialize(false);
+                    engines[i].Initialize(false);
                 }
             }
-
         }
     
     #endregion

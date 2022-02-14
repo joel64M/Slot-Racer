@@ -12,14 +12,13 @@ namespace NameSpaceName {
         #region Variables
         GameManager gm;
         
-      public  Statistics mainPlayerStats;
+          public  Statistics mainPlayerStats;
 
         [Header("Panel Properties")]
         [SerializeField] GameObject beforeGameplayPanel;
         [SerializeField] GameObject gameplayPanel;
         [SerializeField] GameObject gameCompletePanel;
         [SerializeField] GameObject gameOverPanel;
-    //    [SerializeField] Slider progressionSlider;
         [SerializeField] Image progressionSliderImage;
         [SerializeField] TextMeshProUGUI positionText;
         [SerializeField] TextMeshProUGUI levelText;
@@ -27,11 +26,6 @@ namespace NameSpaceName {
         #endregion
 
         #region Builtin Methods
-
-        void Awake()
-        {
-
-        }
 
         void OnEnable()
         {
@@ -70,24 +64,12 @@ namespace NameSpaceName {
         #region Custom Methods
         void OnGameStateChanged(GAMESTATE gs)
         {
-         
             switch (gs)
             {
                 case GAMESTATE.GAMESTART:
                     break;
                 case GAMESTATE.RACECOMPLETE:
-                    if (mainPlayerStats.finalRank == 0)
-                    {
-                      //  GameCompleteUI();
 
-                        gm.SetGameState(GAMESTATE.GAMECOMPLETE);
-                    }
-                    else
-                    {
-                       // GameOverUI();
-
-                        gm.SetGameState(GAMESTATE.GAMEOVER);
-                    }
                     break;
                 case GAMESTATE.GAMEOVER:
                     //  gm.SetGameState(GAMESTATE.GAMEOVER);
@@ -123,24 +105,19 @@ namespace NameSpaceName {
         public void _LoadScene(string scene)
         {
             Time.timeScale = 1;
-
             SceneManager.LoadScene(scene);
         }
         public void _PauseButton()
         {
             //change ui to pause
-            
             Time.timeScale = 0;
-
             gm.SetGameState(GAMESTATE.PAUSE);
-
         }
         public void _ResumeButton()
         {
             //change ui to gameplay
             //timer countdown 
             Time.timeScale = 1;
-
             gm.SetGameState(GAMESTATE.RESUME);
         }
         void GameOverUI()
@@ -155,6 +132,10 @@ namespace NameSpaceName {
             gameCompletePanel.SetActive(true);
         }
 
+        public void ShowGo(GameObject go)
+        {
+            go.SetActive(true);
+        }
         #endregion
 
     }
