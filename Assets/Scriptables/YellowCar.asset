@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8bba5cdbc76d425ea4909e914d82ced, type: 3}
   m_Name: YellowCar
   m_EditorClassIdentifier: 
-  image: {fileID: 0}
-  tint: {r: 0.98765564, g: 1, b: 0, a: 1}
-  price: 10
+  image: {fileID: 21300000, guid: b5544e22f0f1647069d5b3e17dfada49, type: 3}
+  tint: {r: 1, g: 1, b: 1, a: 1}
+  price: 0
   nameString: YellowCar
   prefab: {fileID: 5801549553187305918, guid: 636265e025de24126840c6ec34fed444, type: 3}
-  isDefaultSelected: 0
+  isDefaultSelected: 1

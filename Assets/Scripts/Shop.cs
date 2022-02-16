@@ -7,10 +7,9 @@ public class Shop : MonoBehaviour
 {
     [Space(5)]
     [Header("ASSIGN")]
-    //[SerializeField] float shopTimer = 0.5f;
     [SerializeField] ShopSo shopSo;
-    [SerializeField] Transform characterShopParent;
-    [SerializeField] Transform characterGameParent;
+    [SerializeField] Transform characterShopParent;  //prefabs in shop
+    [SerializeField] Transform characterGameParent;//prefas in the game
     [SerializeField] GameObject itemPrefab;
 
     [Space(5)]
@@ -19,19 +18,18 @@ public class Shop : MonoBehaviour
     [SerializeField] GameObject buyButtonGo;
     [SerializeField] TextMeshProUGUI buyButtonPriceTxt;
     [SerializeField] GameObject shopCanvasGo;
-    [SerializeField] GameObject outpanel;
-    [SerializeField] GameObject coinPanel;
     [SerializeField] TextMeshProUGUI coinText;
 
     [Space(5)]
     [Header("PRIVATE")]
-    //[SerializeField] ShopItem currentShopItem;  //current in selection 
-    //[SerializeField] ShopItem tempShopItem; //main shop item
-    //[SerializeField] Image currentHighlightImg;
     [SerializeField] Dictionary<ShopItemSo, GameObject> shopCharacterDict = new Dictionary<ShopItemSo, GameObject>();
     [SerializeField] Dictionary<ShopItemSo, GameObject> gameCharacterDict = new Dictionary<ShopItemSo, GameObject>();
 
-    //[SerializeField] GameObject currentActivatedPrefab;
+    [SerializeField] GameObject currentActivatedShopCharacterPrefab = null;
+    [SerializeField] GameObject currentActivatedGameCharacterPrefab = null;
+
+    [SerializeField] ShopItem currentActivatedShopItem = null;   //current in selection 
+    [SerializeField] ShopItem currentSelectedShopItem = null; //main shop item
 
     //Action
     public Action shopClosed;
@@ -41,36 +39,13 @@ public class Shop : MonoBehaviour
     {
         //if (characterParent == null)
         //    characterParent = GameObject.FindGameObjectWithTag("Player").gameObject.transform;
-        PlayerPrefs.GetInt("COINS", 100);
-        //InitializeShop();
         InitShop();
     }
-
-    void Start()
+    private void Start()
     {
         UpdateCoinUi();
+
     }
-
-    //public void HighlightItem(ShopItem item)
-    //{
-    //    if (item == currentShopItem) return;
-
-    //    if (PlayerPrefs.GetInt(item.ReturnShopItemSo().nameString + "UNLOCKED", 0) == 1)
-    //    {
-    //        buyButtonGo.SetActive(false);
-    //        PlayerPrefs.SetInt(currentShopItem.ReturnShopItemSo().nameString + "SELECTED", 0);
-    //        PlayerPrefs.SetInt(item.ReturnShopItemSo().nameString + "SELECTED", 1);
-    //        tempShopItem = item;
-    //    }
-    //    else
-    //    {
-    //        buyButtonGo.SetActive(true);
-    //    }
-    //    currentShopItem = item;
-    //    HighlightImg(item);
-    //    EnableCharacter(item);
-    //}
-
 
     public void SelectItem(ShopItem item)
     {
@@ -79,7 +54,7 @@ public class Shop : MonoBehaviour
         if (PlayerPrefs.GetInt(item.shopItemSo.nameString + "UNLOCKED", 0) == 1)
         {
             buyButtonGo.SetActive(false);
-            PlayerPrefs.SetInt(currentActivatedShopItem.shopItemSo.nameString + "SELECTED", 0);
+            PlayerPrefs.SetInt(currentSelectedShopItem.shopItemSo.nameString + "SELECTED", 0);
             PlayerPrefs.SetInt(item.shopItemSo.nameString + "SELECTED", 1);
 
             currentActivatedShopItem.UnHighlightShopItem();
@@ -106,19 +81,19 @@ public class Shop : MonoBehaviour
     {
         go.SetActive(false);
     }
+
     public void Show(GameObject go)
     {
         go.SetActive(true);
     }
+
     public void _CloseShop()
     {
-
         currentActivatedShopItem.UnHighlightShopItem();
         currentSelectedShopItem.HighlightShopItem();
-        //if(currentActivatedShopItem==tempShopItem)
-        //HighlightImg(tempShopItem);
-        //currentShopItem = tempShopItem;
 
+
+        currentActivatedShopItem = currentSelectedShopItem;
         EnableCharacter(currentSelectedShopItem);
         //LeanTween.moveY(outpanel.GetComponent<RectTransform>(), -1000f, shopTimer).setOnUpdate((float val) => {
         //    if (val > 0.9f)
@@ -145,41 +120,13 @@ public class Shop : MonoBehaviour
             PlayerPrefs.SetInt("COINS", PlayerPrefs.GetInt("COINS") - currentActivatedShopItem.shopItemSo.price);
             UpdateCoinUi();
             PlayerPrefs.SetInt(currentSelectedShopItem.shopItemSo.nameString + "SELECTED", 0);
-            //tempShopItem = currentShopItem;
-            //currentActivatedShopItem = tempShopItem;
-            //tempShopItem = currentActivatedShopItem;
-
+           currentSelectedShopItem = currentActivatedShopItem;
             PlayerPrefs.SetInt(currentActivatedShopItem.shopItemSo.nameString + "UNLOCKED", 1);
             PlayerPrefs.SetInt(currentActivatedShopItem.shopItemSo.nameString + "SELECTED", 1);
-            //currentShopItem.ReturnPriceTagGO().SetActive(false);
             buyButtonGo.SetActive(false);
         }
-        //if (currentShopItem.ReturnShopItemSo().price < PlayerPrefs.GetInt("COINS",0))
-        //{
-        //    PlayerPrefs.SetInt("COINS", PlayerPrefs.GetInt("COINS") - currentShopItem.ReturnShopItemSo().price);
-        //    UpdateCoinUi();
-        //    PlayerPrefs.SetInt(tempShopItem.ReturnShopItemSo().nameString + "SELECTED", 0);
-        //    tempShopItem = currentShopItem;
-
-        //    PlayerPrefs.SetInt(currentShopItem.ReturnShopItemSo().nameString + "UNLOCKED", 1);
-        //    PlayerPrefs.SetInt(currentShopItem.ReturnShopItemSo().nameString + "SELECTED", 1);
-        //    currentShopItem.ReturnPriceTagGO().SetActive(false);
-        //    buyButtonGo.SetActive(false);
-        //}
     }
 
-
-   [SerializeField] GameObject currentActivatedShopCharacterPrefab = null;
-    [SerializeField] GameObject currentActivatedGameCharacterPrefab = null;
-
-
-    [SerializeField] ShopItem currentActivatedShopItem = null;
-    [SerializeField] ShopItem currentSelectedShopItem = null;
-
-    public void DDD()
-    {
-        Debug.Log("jjj");
-    }
     void InitShop()
     {
         //bool isDefaultFound=false;
@@ -213,124 +160,42 @@ public class Shop : MonoBehaviour
                 PlayerPrefs.SetInt(itemSo.nameString + "UNLOCKED", 1);
             }
 
-
             if (PlayerPrefs.GetInt(itemSo.nameString + "SELECTED", 0) == 1)
             {
-                //HighlightImg(currentShopItem);
-                currentShopItem.SelectShopItem();
+                currentShopItem.HighlightShopItem();
+                PlayerPrefs.SetInt(currentShopItem.shopItemSo.nameString + "SELECTED", 1);
                 isSelectedFound = true;
                 currentActivatedShopItem =currentSelectedShopItem= currentShopItem;
-                Debug.Log(itemSo.nameString);
-                //currentShopItem = tempShopItem = currentShopItemTemp;
+
                 currentActivatedShopCharacterPrefab = character;
                 currentActivatedGameCharacterPrefab = characterGame;
                 currentActivatedShopCharacterPrefab.SetActive(true);
                 currentActivatedGameCharacterPrefab.SetActive(true);
-
-
             }
             else
             {
-                //currentShopItem.ReturnHighlightedImg().enabled = false;
-                currentShopItem.UnSelectShopItem();
+                currentShopItem.UnHighlightShopItem();
+                PlayerPrefs.SetInt(currentShopItem.shopItemSo.nameString + "SELECTED", 0);
             }
-
-            //if (PlayerPrefs.GetInt(itemSo.nameString + "UNLOCKED", 0) == 1)
-            //{
-            //    currentShopItem.ReturnPriceTagGO().SetActive(false);
-            //}
-
         }
         buyButtonGo.SetActive(false);
 
         if (!isSelectedFound)
         {
-            //PlayerPrefs.SetInt(defaultShopItem.nameString + "SELECTED", 1);
-            defaultShopItem.SelectShopItem();
-            //HighlightImg(defaultShopItem);
+            defaultShopItem.HighlightShopItem();
+            PlayerPrefs.SetInt(defaultShopItem.shopItemSo.nameString + "SELECTED", 1);
+
             currentActivatedShopItem =currentSelectedShopItem= defaultShopItem;
+
             currentActivatedShopCharacterPrefab = defaultCharacterShopPrefab;
             currentActivatedGameCharacterPrefab = defaultCharacterGamePrefab;
             currentActivatedShopCharacterPrefab.SetActive(true);
             currentActivatedGameCharacterPrefab.SetActive(true);
-            //defaultCharacter.SetActive(true);
-            //currentActivatedPrefab = defaultCharacter;
-            //currentShopItem = tempShopItem = defaultShopItem;
-            buyButtonGo.SetActive(false);
-        }
 
-    }
-
-    /*
-    void InitializeShop()
-    {
-        bool isFoundDefault = false;
-        ShopItem defaultShopItem = null;
-        GameObject defaultCharacter = null;
-
-        foreach (var item in shopSo.shopItems)
-        {
-            GameObject go = Instantiate(itemPrefab, itemParent);
-            go.name = item.nameString;
-
-            GameObject goo = Instantiate(item.prefab, characterParent);
-            dict.Add(item, goo);
-            goo.SetActive(false);
-
-            if (item.isDefaultSelected && !defaultCharacter)
-            {
-                defaultShopItem = go.GetComponent<ShopItem>().Init(item, this);
-                defaultCharacter = goo;
-            }
-         
-            ShopItem currentShopItemTemp = go.GetComponent<ShopItem>().Init(item, this);
-            if (item.isDefaultSelected)
-            {
-                PlayerPrefs.SetInt(currentShopItemTemp.ReturnShopItemSo().nameString + "UNLOCKED", 1);
-                currentShopItemTemp.ReturnPriceTagGO().SetActive(false);
-
-            }
-            if (PlayerPrefs.GetInt(item.nameString + "SELECTED", 0) == 1)
-            {
-                HighlightImg(currentShopItemTemp);
-                isFoundDefault = true;
-                currentShopItem = tempShopItem = currentShopItemTemp;
-
-                currentActivatedPrefab = goo;
-                goo.SetActive(true);
-            }
-            else
-            {
-                currentShopItemTemp.ReturnHighlightedImg().enabled = false;
-            }
-
-            if (PlayerPrefs.GetInt(item.nameString + "UNLOCKED", 0) == 1)
-            {
-                currentShopItemTemp.ReturnPriceTagGO().SetActive(false);
-            }
-
-            buyButtonGo.SetActive(false);
-        }
-
-        if (!isFoundDefault)
-        {
-            PlayerPrefs.SetInt(defaultShopItem.ReturnShopItemSo().nameString + "SELECTED", 1);
-            HighlightImg(defaultShopItem);
-            defaultCharacter.SetActive(true);
-            currentActivatedPrefab = defaultCharacter;
-            currentShopItem = tempShopItem = defaultShopItem;
             buyButtonGo.SetActive(false);
         }
     }
-  
-    //void HighlightImg(ShopItem shopItem)
-    //{
-    //    if (currentHighlightImg)
-    //        currentHighlightImg.enabled = false;
-    //    currentHighlightImg = shopItem.ReturnHighlightedImg();
-    //    currentHighlightImg.enabled = true;
-    //}
-    */
+ 
     void UpdateCoinUi()
     {
         coinText.text = PlayerPrefs.GetInt("COINS").ToString();
@@ -345,8 +210,5 @@ public class Shop : MonoBehaviour
         currentActivatedGameCharacterPrefab.SetActive(false);
         currentActivatedGameCharacterPrefab = gameCharacterDict[item.shopItemSo];
         gameCharacterDict[item.shopItemSo].SetActive(true);
-        //currentActivatedPrefab.SetActive(false);
-        //currentActivatedPrefab = dict[item.ReturnShopItemSo()];
-        //dict[item.ReturnShopItemSo()].SetActive(true);
     }
 }

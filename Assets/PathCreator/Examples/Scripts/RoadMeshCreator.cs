@@ -194,6 +194,14 @@ namespace PathCreation.Examples {
             mesh.SetTriangles (underRoadTriangles, 1);
             mesh.SetTriangles (sideOfRoadTriangles, 2);
             mesh.RecalculateBounds ();
+            Debug.Log(path.length);
+            string str = ( Mathf.FloorToInt(path.length).ToString());
+            Debug.Log(str.Length);
+            str = str.Substring(0,str.Length-1);
+            int result;
+            Debug.Log(int.TryParse(str,out result));
+            textureTiling = result/2;
+         
         }
 
         // Add MeshRenderer and MeshFilter components to this gameobject if not already attached

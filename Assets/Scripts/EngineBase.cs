@@ -106,19 +106,19 @@ public class EngineBase : MonoBehaviour
                 currentIndex++;
             }
         }
-        if (currentIndex >= positions.Count)
-        {
-            if (Vector3.Distance(transform.position, positions[currentIndex - 1].point) < 2f)
-            {
-                pathCompleted = true;
-                if (!complete)
-                {
-                    RaceComplete();
-                }
-                currentIndex = positions.Count - 1;
+        //if (currentIndex >= positions.Count)
+        //{
+        //    if (Vector3.Distance(transform.position, positions[currentIndex - 1].point) < 2f)
+        //    {
+        //        pathCompleted = true;
+        //        if (!complete)
+        //        {
+        //            RaceComplete();
+        //        }
+        //        currentIndex = positions.Count - 1;
 
-            }
-        }
+        //    }
+        //}
 
     }
 
@@ -210,12 +210,19 @@ public class EngineBase : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("GOAL"))
+        if (other.CompareTag("Goal"))
         {
             if (!complete)
             {
+                Debug.Log("collider win");
+                pathCompleted = true;
                 RaceComplete();
             }
+        }
+
+        if (other.CompareTag("Coin"))
+        {
+            gm.CoinCollected();
         }
     }
 

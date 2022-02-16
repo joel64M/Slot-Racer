@@ -22,6 +22,7 @@ namespace NameSpaceName {
         [SerializeField] Image progressionSliderImage;
         [SerializeField] TextMeshProUGUI positionText;
         [SerializeField] TextMeshProUGUI levelText;
+        [SerializeField] TextMeshProUGUI coinText;
 
         #endregion
 
@@ -35,6 +36,7 @@ namespace NameSpaceName {
         private void Start()
         {
             levelText.text = (PlayerPrefs.GetInt("LEVEL", 0) + 1).ToString();
+            coinText.text = gm.coinCount.ToString();
         }
         private void OnDisable()
         {
@@ -81,7 +83,10 @@ namespace NameSpaceName {
             }
         }
 
-
+        public void UpdateCoinTxt(int coinCount)
+        {
+            coinText.text = coinCount.ToString();
+        }
         public void _StartGameButton()
         {
             gm.SetGameState(GAMESTATE.GAMESTART);
@@ -92,21 +97,23 @@ namespace NameSpaceName {
         public void _RestartGameButton()
         {
             Time.timeScale = 1;
-          // Debug.Log(SceneManager.GetActiveScene().buildIndex);
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            // Debug.Log(SceneManager.GetActiveScene().buildIndex);
+            //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            gm.RestartLevel();
 
         }
         public void _NextLevelButton()
         {
           Time.timeScale = 1;
-            if (Application.CanStreamedLevelBeLoaded(SceneManager.GetActiveScene().buildIndex + 1))
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
+            //if (Application.CanStreamedLevelBeLoaded(SceneManager.GetActiveScene().buildIndex + 1))
+            //    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
+            gm.RestartLevel();
         }
-        public void _LoadScene(string scene)
-        {
-            Time.timeScale = 1;
-            SceneManager.LoadScene(scene);
-        }
+        //public void _LoadScene(string scene)
+        //{
+        //    Time.timeScale = 1;
+        //    SceneManager.LoadScene(scene);
+        //}
         public void _PauseButton()
         {
             //change ui to pause
@@ -135,6 +142,10 @@ namespace NameSpaceName {
         public void ShowGo(GameObject go)
         {
             go.SetActive(true);
+        }
+        public void HideGo(GameObject go)
+        {
+            go.SetActive(false);
         }
         #endregion
 

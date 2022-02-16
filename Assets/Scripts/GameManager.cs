@@ -12,6 +12,9 @@ namespace NameSpaceName {
     {
 
         #region Variables
+        UiManager uim;
+        [SerializeField] bool isTestScene = false;
+        public int coinCount;
         public int reachedDestination = 0;
         public List<EngineBase> engines =  new List<EngineBase>();
         public GAMESTATE CurrentGameState
@@ -68,15 +71,68 @@ namespace NameSpaceName {
         //    }
         //}
 
+
+        private void Awake()
+        {
+            coinCount = PlayerPrefs.GetInt("COINS", 110);
+            PlayerPrefs.SetInt("COINS", coinCount);
+            PlayerPrefs.Save();
+
+            uim = FindObjectOfType<UiManager>();
+            InitializeLevel();
+        }
         void Start()
         {
             CalculateSides();
         }
-   
+
         #endregion
 
         #region Custom Methods
+        public void CoinCollected()
+        {
+            coinCount++;
+            uim.UpdateCoinTxt(coinCount);
+        }
 
+
+        public void RestartLevel()
+        {
+            //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            SceneTransitionScript.instance.StartransitionTo(SceneManager.GetActiveScene().buildIndex);
+        }
+
+        public void LoadNextLevel()
+        {
+            if (Application.CanStreamedLevelBeLoaded(SceneManager.GetActiveScene().buildIndex + 1))
+            {
+                //Debug.Log(SceneManager.GetActiveScene().buildIndex + 1);
+                //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+                SceneTransitionScript.instance.StartransitionTo(SceneManager.GetActiveScene().buildIndex + 1);
+            }
+            else
+            {
+                SceneTransitionScript.instance.StartransitionTo("Final");
+            }
+        }
+
+        void InitializeLevel()
+        {
+            if (isTestScene) return;
+            if (PlayerPrefs.GetInt("LEVELS", 1) != SceneManager.GetActiveScene().buildIndex)
+            {
+                if (Application.CanStreamedLevelBeLoaded(PlayerPrefs.GetInt("LEVELS", 1)))
+                {
+                    //SceneManager.LoadScene(PlayerPrefs.GetInt("LEVELS", 1));
+                    SceneTransitionScript.instance.StartransitionTo(PlayerPrefs.GetInt("LEVELS", 1));
+                }
+                else
+                {
+                    //SceneManager.LoadScene("Final");
+                    SceneTransitionScript.instance.StartransitionTo("Final");
+                }
+            }
+        }
         public void SetGameState(GAMESTATE gs)
         {
             OnGameStateChangedAction?.Invoke(gs);

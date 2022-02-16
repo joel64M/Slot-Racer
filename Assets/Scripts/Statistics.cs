@@ -59,7 +59,6 @@ namespace NameSpaceName
             if (isPlayer)
             {
                 gm.SetGameState(GAMESTATE.RACECOMPLETE);
-             
             }
         }
 
