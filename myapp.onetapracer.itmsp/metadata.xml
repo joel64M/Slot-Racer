@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<package version="software5.7" xmlns="http://apple.com/itunes/importer">
+  <provider>1546499055</provider>
+  <team_id>1546499055</team_id>
+  <software>
+    <vendor_id>myapp.onetapracer</vendor_id>
+    <software_metadata>
+      <in_app_purchases>
+        <in_app_purchase>
+          <product_id>com.polymathgames.onetapracer.removeads</product_id>
+          <reference_name>com.polymathgames.onetapracer.removeads</reference_name>
+          <type>non-consumable</type>
+          <products>
+            <product>
+              <cleared_for_sale>true</cleared_for_sale>
+              <wholesale_price_tier>1</wholesale_price_tier>
+            </product>
+          </products>
+          <locales>
+            <locale name="en-US">
+              <title>Remove Ads</title>
+              <description>Removes the ads that appear between the levels</description>
+            </locale>
+          </locales>
+          <review_screenshot>
+            <file_name>sc-01.png</file_name>
+            <size>288122</size>
+            <checksum>9a28db43d2aa2e3d8a9000239aead375</checksum>
+          </review_screenshot>
+        </in_app_purchase>
+      </in_app_purchases>
+    </software_metadata>
+  </software>
+</package>

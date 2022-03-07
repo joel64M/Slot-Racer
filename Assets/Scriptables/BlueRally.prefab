@@ -903,6 +903,7 @@ GameObject:
   - component: {fileID: 5901947825491491151}
   - component: {fileID: 5880829129757731873}
   - component: {fileID: 5888577293074177369}
+  - component: {fileID: 742068176541855306}
   m_Layer: 0
   m_Name: BlueRally
   m_TagString: Untagged
@@ -983,3 +984,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &742068176541855306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5902625076968099487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 562c343e0e40e47b6afe04e7fc218208, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ac: {fileID: 8300000, guid: 6caf1e54a3aa6ad488e6088c9a93b28b, type: 3}

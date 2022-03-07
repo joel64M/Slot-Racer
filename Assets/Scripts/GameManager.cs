@@ -74,7 +74,7 @@ namespace NameSpaceName {
 
         private void Awake()
         {
-            coinCount = PlayerPrefs.GetInt("COINS", 110);
+            coinCount = PlayerPrefs.GetInt("COINS", 0);
             PlayerPrefs.SetInt("COINS", coinCount);
             PlayerPrefs.Save();
 
@@ -118,7 +118,8 @@ namespace NameSpaceName {
 
         void InitializeLevel()
         {
-            if (isTestScene) return;
+            //if (isTestScene) return;
+            Debug.Log(PlayerPrefs.GetInt("LEVELS", 1));
             if (PlayerPrefs.GetInt("LEVELS", 1) != SceneManager.GetActiveScene().buildIndex)
             {
                 if (Application.CanStreamedLevelBeLoaded(PlayerPrefs.GetInt("LEVELS", 1)))
@@ -161,7 +162,8 @@ namespace NameSpaceName {
                 case GAMESTATE.GAMECOMPLETE:
                     //  Taptic.Success();
                     //TinySauce.OnGameFinished((SceneManager.GetActiveScene().buildIndex + 1).ToString(), true,0);
-                    PlayerPrefs.SetInt("LEVEL", SceneManager.GetActiveScene().buildIndex + 1);
+                    PlayerPrefs.SetInt("COINS", coinCount);
+                    PlayerPrefs.SetInt("LEVELS", SceneManager.GetActiveScene().buildIndex + 1);
                     break;
             }
         }
@@ -177,10 +179,26 @@ namespace NameSpaceName {
                 if (i == randomNum)
                 {
                     engines[i].Initialize(true);
+                    if (engines[i].gameObject.GetComponent<AiEngine>())
+                    {
+                    }
+                    else
+                    {
+                        //left side
+                        GetComponent<SimpleSpawner>().CoinPlacer(GameObject.FindGameObjectWithTag("LeftPath").GetComponent<SidePath>());
+                    }
                 }
                 else
                 {
                     engines[i].Initialize(false);
+                    if (engines[i].gameObject.GetComponent<AiEngine>())
+                    {
+                    }
+                    else
+                    {
+                        //right side
+                        GetComponent<SimpleSpawner>().CoinPlacer(GameObject.FindGameObjectWithTag("RightPath").GetComponent<SidePath>());
+                    }
                 }
             }
         }

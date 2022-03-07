@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Purchasing;
 namespace NameSpaceName {
 
     public class UiManager : MonoBehaviour
@@ -23,6 +24,13 @@ namespace NameSpaceName {
         [SerializeField] TextMeshProUGUI positionText;
         [SerializeField] TextMeshProUGUI levelText;
         [SerializeField] TextMeshProUGUI coinText;
+        [SerializeField] TextMeshProUGUI coinText2;
+
+        [SerializeField] AudioSource[] ads;
+
+
+        [SerializeField] GameObject adsButton;
+        [SerializeField] GameObject restoreButton;
 
         #endregion
 
@@ -36,11 +44,19 @@ namespace NameSpaceName {
         private void Start()
         {
             levelText.text = (PlayerPrefs.GetInt("LEVEL", 0) + 1).ToString();
-            coinText.text = gm.coinCount.ToString();
+            coinText.text =coinText2.text= gm.coinCount.ToString();
+            ads = FindObjectsOfType<AudioSource>(true);
+
+            if (PlayerPrefs.HasKey("ADS"))
+            {
+                adsButton.SetActive(false);
+            }
+
         }
         private void OnDisable()
         {
             gm.OnGameStateChangedAction -= OnGameStateChanged;
+
         }
         private void Update()
         {
@@ -82,10 +98,11 @@ namespace NameSpaceName {
                     break;
             }
         }
-
+  
         public void UpdateCoinTxt(int coinCount)
         {
-            coinText.text = coinCount.ToString();
+            coinText.text = coinText2.text = gm.coinCount.ToString();
+
         }
         public void _StartGameButton()
         {
@@ -97,6 +114,10 @@ namespace NameSpaceName {
         public void _RestartGameButton()
         {
             Time.timeScale = 1;
+            foreach (var item in ads)
+            {
+                item.Play();
+            }
             // Debug.Log(SceneManager.GetActiveScene().buildIndex);
             //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             gm.RestartLevel();
@@ -107,7 +128,7 @@ namespace NameSpaceName {
           Time.timeScale = 1;
             //if (Application.CanStreamedLevelBeLoaded(SceneManager.GetActiveScene().buildIndex + 1))
             //    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
-            gm.RestartLevel();
+            gm.LoadNextLevel();
         }
         //public void _LoadScene(string scene)
         //{
@@ -117,7 +138,12 @@ namespace NameSpaceName {
         public void _PauseButton()
         {
             //change ui to pause
+            foreach (var item in ads)
+            {
+                item.Stop();
+            }
             Time.timeScale = 0;
+
             gm.SetGameState(GAMESTATE.PAUSE);
         }
         public void _ResumeButton()
@@ -125,6 +151,10 @@ namespace NameSpaceName {
             //change ui to gameplay
             //timer countdown 
             Time.timeScale = 1;
+            foreach (var item in ads)
+            {
+                item.Play();
+            }
             gm.SetGameState(GAMESTATE.RESUME);
         }
         void GameOverUI()
@@ -147,7 +177,32 @@ namespace NameSpaceName {
         {
             go.SetActive(false);
         }
+
+
+
         #endregion
 
+
+        #region IAP
+
+        //IAPs
+        //string removeAds = "com.polymathgames.onetapracer.removeads";
+
+        //public void PurchaseComplete(Product product)
+        //{
+        //    Debug.Log("purchase complete *** " + product);
+        //    if (product.definition.id == removeAds)
+        //    {
+        //        PlayerPrefs.SetInt("ADS", 0);
+        //        Debug.Log("Remove ads **");
+        //        adsButton.SetActive(false);
+        //    }
+        //}
+
+        //public void PurchaseFailed(Product product, PurchaseFailureReason failureReason)
+        //{
+        //    Debug.Log(product.definition.id + " *** purchase fail ***" + failureReason);
+        //}
+        #endregion
     }
 }

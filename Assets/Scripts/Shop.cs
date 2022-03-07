@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using TMPro;
+using NameSpaceName;
 public class Shop : MonoBehaviour
 {
     [Space(5)]
@@ -19,6 +20,7 @@ public class Shop : MonoBehaviour
     [SerializeField] TextMeshProUGUI buyButtonPriceTxt;
     [SerializeField] GameObject shopCanvasGo;
     [SerializeField] TextMeshProUGUI coinText;
+    [SerializeField] GameObject rewardedVideoButton;
 
     [Space(5)]
     [Header("PRIVATE")]
@@ -44,9 +46,16 @@ public class Shop : MonoBehaviour
     private void Start()
     {
         UpdateCoinUi();
-
     }
 
+    private void OnEnable()
+    {
+            AdManager.instance.RewardedVideoWatched += RewardedVideoWatchd;
+    }
+    private void OnDisable()
+    {
+        AdManager.instance.RewardedVideoWatched -= RewardedVideoWatchd;
+    }
     public void SelectItem(ShopItem item)
     {
         //if (item == currentActivatedShopItem) return;
@@ -77,6 +86,18 @@ public class Shop : MonoBehaviour
     
         EnableCharacter(item);
     }
+
+    void RewardedVideoWatchd()
+    {
+        rewardedVideoButton.SetActive(false);
+        int coins = PlayerPrefs.GetInt("COINS") + 50;
+        FindObjectOfType<GameManager>().coinCount = coins;
+        FindObjectOfType<UiManager>().UpdateCoinTxt(coins);
+        PlayerPrefs.SetInt("COINS",coins );
+        coinText.text = coins.ToString();
+    }
+
+
     public void Hide(GameObject go)
     {
         go.SetActive(false);
@@ -85,6 +106,11 @@ public class Shop : MonoBehaviour
     public void Show(GameObject go)
     {
         go.SetActive(true);
+    }
+
+    public void _RewardAd()
+    {
+        AdManager.instance.ShowRewardedAd();
     }
 
     public void _CloseShop()
@@ -199,6 +225,8 @@ public class Shop : MonoBehaviour
     void UpdateCoinUi()
     {
         coinText.text = PlayerPrefs.GetInt("COINS").ToString();
+        FindObjectOfType<GameManager>().coinCount = PlayerPrefs.GetInt("COINS");
+        FindObjectOfType<UiManager>().UpdateCoinTxt(PlayerPrefs.GetInt("COINS"));
     }
 
     void EnableCharacter(ShopItem item)

@@ -25,7 +25,9 @@ namespace PathCreation.Examples {
         public float minDistanceBetweenPoints = 3f;
         public bool debug;
        public GameObject meshHolder;
-        [SerializeField] GameObject finalPodium;
+        [SerializeField] GameObject endRoad;
+        [SerializeField] GameObject startRoad;
+
         MeshFilter meshFilter;
         MeshRenderer meshRenderer;
         Mesh mesh;
@@ -42,9 +44,9 @@ namespace PathCreation.Examples {
 
                 CreateSidePaths();
                 
-                finalPodium.transform.position = pathCreator.path.GetPoint(pathCreator.path.NumPoints-1);
-                finalPodium.transform.eulerAngles = new Vector3(0, Vector3.Angle(Vector3.forward, pathCreator.path.GetNormal(pathCreator.path.NumPoints - 1))-90, 0);
-
+                endRoad.transform.position = pathCreator.path.GetPoint(pathCreator.path.NumPoints-1);
+                endRoad.transform.eulerAngles = new Vector3(0, Vector3.Angle(Vector3.forward, pathCreator.path.GetNormal(pathCreator.path.NumPoints - 1))-90, 0);
+                startRoad.transform.position = pathCreator.path.GetPoint(0);
             }
         }
 
@@ -194,12 +196,12 @@ namespace PathCreation.Examples {
             mesh.SetTriangles (underRoadTriangles, 1);
             mesh.SetTriangles (sideOfRoadTriangles, 2);
             mesh.RecalculateBounds ();
-            Debug.Log(path.length);
+            //Debug.Log(path.length);
             string str = ( Mathf.FloorToInt(path.length).ToString());
-            Debug.Log(str.Length);
+            //Debug.Log(str.Length);
             str = str.Substring(0,str.Length-1);
             int result;
-            Debug.Log(int.TryParse(str,out result));
+            int.TryParse(str, out result);
             textureTiling = result/2;
          
         }

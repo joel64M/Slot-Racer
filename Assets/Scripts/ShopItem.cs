@@ -22,7 +22,6 @@ public class ShopItem : MonoBehaviour
 
     public void _SelectItem()
     {
-        Debug.Log(this.shopItemSo.nameString);
         shop.SelectItem(this);
     }
 
